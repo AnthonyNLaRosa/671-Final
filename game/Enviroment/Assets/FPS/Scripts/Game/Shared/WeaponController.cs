@@ -28,6 +28,9 @@ namespace Unity.FPS.Game
     [RequireComponent(typeof(AudioSource))]
     public class WeaponController : MonoBehaviour
     {
+        [FMODUnity.EventRef]
+        public string eventPath_laser;
+
         [Header("Information")] [Tooltip("The name that will be displayed in the UI for this weapon")]
         public string WeaponName;
 
@@ -428,6 +431,8 @@ namespace Unity.FPS.Game
 
             OnShoot?.Invoke();
             OnShootProcessed?.Invoke();
+
+            FMODUnity.RuntimeManager.PlayOneShot(eventPath_laser, transform.position);
         }
 
         public Vector3 GetShotDirectionWithinSpread(Transform shootTransform)

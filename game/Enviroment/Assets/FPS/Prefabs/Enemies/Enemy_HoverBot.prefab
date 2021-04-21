@@ -106,6 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de939d976a5bb0419ccd8dbd0b6836b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventPath_Alert: event:/SFX/Hoverbot_Alert
+  eventPath_Attack: event:/SFX/Hoverbot_Attack
+  eventPath_Death: event:/SFX/Hoverbot_Death
   SelfDestructYHeight: -20
   PathReachingRadius: 2
   OrientationSpeed: 10
@@ -146,7 +149,6 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   FlashOnHitDuration: 0.2
-  DamageTick: {fileID: 8300000, guid: a7fae22399a6e1d448dc0dd2210f1dac, type: 3}
   DeathVfx: {fileID: 8950624839484268180, guid: 2a8f5052fe50f7b41b17149abb0f7414,
     type: 3}
   DeathVfxSpawnPoint: {fileID: 381893446485871685}
@@ -179,8 +181,6 @@ MonoBehaviour:
   - {fileID: 6104096765092005263}
   - {fileID: 1407167163009738010}
   - {fileID: 8934028655093144013}
-  OnDetectSfx: {fileID: 8300000, guid: 25722734eeccba042a18e26e376ca542, type: 3}
-  MovementSound: {fileID: 0}
   PitchDistortionMovementSpeed:
     Min: 1
     Max: 1.5
@@ -274,8 +274,7 @@ AudioSource:
   m_GameObject: {fileID: 2015434656898269652}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243469522734499658, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 44c5f76f80602024e82d3e5f3af4ee97, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.75
@@ -761,6 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad90ba0b1477764da373f5ec01a8cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventPath_laser: 
   WeaponName: 
   WeaponIcon: {fileID: 0}
   CrosshairDataDefault:
@@ -799,12 +799,6 @@ MonoBehaviour:
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 3930201484039205849}
   UnparentMuzzleFlash: 0
-  ShootSfx: {fileID: 8300000, guid: a56e3c9f90e17894eb1625f603eceb54, type: 3}
-  ChangeWeaponSfx: {fileID: 0}
-  UseContinuousShootSound: 0
-  ContinuousShootStartSfx: {fileID: 0}
-  ContinuousShootLoopSfx: {fileID: 0}
-  ContinuousShootEndSfx: {fileID: 0}
 --- !u!82 &2231955200838058728
 AudioSource:
   m_ObjectHideFlags: 0
@@ -814,8 +808,7 @@ AudioSource:
   m_GameObject: {fileID: 8093968053717355753}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243177779269262668, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.6

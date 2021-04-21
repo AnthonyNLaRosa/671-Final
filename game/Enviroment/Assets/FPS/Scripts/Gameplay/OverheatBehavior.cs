@@ -19,6 +19,11 @@ namespace Unity.FPS.Gameplay
             }
         }
 
+        [FMODUnity.EventRef]
+        public string eventPath_Cooling;
+        FMOD.Studio.EventInstance coolingState;
+        FMOD.Studio.PLAYBACK_STATE state;
+
         [Header("Visual")] [Tooltip("The VFX to scale the spawn rate based on the ammo ratio")]
         public ParticleSystem SteamVfx;
 
@@ -35,6 +40,7 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Curve for ammo to volume ratio")]
         public AnimationCurve AmmoToVolumeRatioCurve;
 
+        
 
         WeaponController m_Weapon;
         List<RendererIndexData> m_OverheatingRenderersData;
@@ -46,6 +52,9 @@ namespace Unity.FPS.Gameplay
         {
             var emissionModule = SteamVfx.emission;
             emissionModule.rateOverTimeMultiplier = 0f;
+
+            coolingState = FMODUnity.RuntimeManager.CreateInstance(eventPath_Cooling);
+            coolingState.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
             m_OverheatingRenderersData = new List<RendererIndexData>();
             foreach (var renderer in GetComponentsInChildren<Renderer>(true))
@@ -80,6 +89,25 @@ namespace Unity.FPS.Gameplay
 
                 m_SteamVfxEmissionModule.rateOverTimeMultiplier = SteamVfxEmissionRateMax * (1f - currentAmmoRatio);
             }
+
+            coolingState.getPlaybackState(out state);
+
+            // cooling sound
+            if (state == FMOD.Studio.PLAYBACK_STATE.STOPPED
+                && currentAmmoRatio != 1
+                && m_Weapon.IsWeaponActive
+                && m_Weapon.IsCooling)
+            {
+                coolingState.start();
+            }
+            else if (state != FMOD.Studio.PLAYBACK_STATE.STOPPED 
+                && (currentAmmoRatio == 1 || !m_Weapon.IsWeaponActive || !m_Weapon.IsCooling))
+            {
+                coolingState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                return;
+            }
+
+            //m_AudioSource.volume = AmmoToVolumeRatioCurve.Evaluate(1 - currentAmmoRatio);
 
             m_LastAmmoRatio = currentAmmoRatio;
         }

@@ -7,6 +7,10 @@ namespace Unity.FPS.Gameplay
     [RequireComponent(typeof(AudioSource))]
     public class Jetpack : MonoBehaviour
     {
+        [FMODUnity.EventRef]
+        public string eventPath_Jetpack;
+        FMOD.Studio.EventInstance jetpackState;
+        FMOD.Studio.PLAYBACK_STATE state;
 
         [Tooltip("Particles for jetpack vfx")] public ParticleSystem[] JetpackVfx;
 
@@ -58,6 +62,9 @@ namespace Unity.FPS.Gameplay
             DebugUtility.HandleErrorIfNullGetComponent<PlayerInputHandler, Jetpack>(m_InputHandler, this, gameObject);
 
             CurrentFillRatio = 1f;
+
+            jetpackState = FMODUnity.RuntimeManager.CreateInstance(eventPath_Jetpack);
+            jetpackState.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
         }
 
         void Update()
@@ -71,6 +78,8 @@ namespace Unity.FPS.Gameplay
             {
                 m_CanUseJetpack = true;
             }
+
+            jetpackState.getPlaybackState(out state);
 
             // jetpack usage
             bool jetpackIsInUse = m_CanUseJetpack && IsJetpackUnlocked && CurrentFillRatio > 0f &&
@@ -104,6 +113,11 @@ namespace Unity.FPS.Gameplay
                     emissionModulesVfx.enabled = true;
                 }
 
+                if (state == FMOD.Studio.PLAYBACK_STATE.STOPPED)
+                {
+                    jetpackState.start();
+                }
+
             }
             else
             {
@@ -125,6 +139,10 @@ namespace Unity.FPS.Gameplay
                 // keeps the ratio between 0 and 1
                 CurrentFillRatio = Mathf.Clamp01(CurrentFillRatio);
 
+                if (state != FMOD.Studio.PLAYBACK_STATE.STOPPED)
+                {
+                    jetpackState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                }
             }
         }
 

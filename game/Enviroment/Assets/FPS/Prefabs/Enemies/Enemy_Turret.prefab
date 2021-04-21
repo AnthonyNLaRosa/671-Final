@@ -215,6 +215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de939d976a5bb0419ccd8dbd0b6836b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventPath_Alert: event:/SFX/Turret_Alert
+  eventPath_Attack: 
+  eventPath_Death: 
   SelfDestructYHeight: -20
   PathReachingRadius: 0
   OrientationSpeed: 10
@@ -255,7 +258,6 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   FlashOnHitDuration: 0.125
-  DamageTick: {fileID: 8300000, guid: a7fae22399a6e1d448dc0dd2210f1dac, type: 3}
   DeathVfx: {fileID: 8950624839484268180, guid: 45ce85b82008be84287f2c7e5bf07647,
     type: 3}
   DeathVfxSpawnPoint: {fileID: 7886326314632062837}
@@ -320,7 +322,6 @@ MonoBehaviour:
   OnDetectVfx:
   - {fileID: 7957976818100458430}
   - {fileID: 4008264615443136680}
-  OnDetectSfx: {fileID: 8300000, guid: 7fac2ef5c59df1a45985d3eb894e8d47, type: 3}
 --- !u!114 &8502097699347725703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,6 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad90ba0b1477764da373f5ec01a8cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventPath_laser: 
   WeaponName: mg
   WeaponIcon: {fileID: 0}
   CrosshairDataDefault:
@@ -711,12 +713,6 @@ MonoBehaviour:
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 638502610521960261}
   UnparentMuzzleFlash: 0
-  ShootSfx: {fileID: 8300000, guid: 0d44f0cb2e91f5f4ca09aded9a1bd9ab, type: 3}
-  ChangeWeaponSfx: {fileID: 0}
-  UseContinuousShootSound: 0
-  ContinuousShootStartSfx: {fileID: 0}
-  ContinuousShootLoopSfx: {fileID: 0}
-  ContinuousShootEndSfx: {fileID: 0}
 --- !u!82 &2231955200838058728
 AudioSource:
   m_ObjectHideFlags: 0
@@ -726,8 +722,7 @@ AudioSource:
   m_GameObject: {fileID: 8093968053717355753}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243177779269262668, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.15

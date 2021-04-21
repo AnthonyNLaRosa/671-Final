@@ -363,6 +363,8 @@ namespace Unity.FPS.AI
 
         void OnDie()
         {
+            FMODUnity.RuntimeManager.PlayOneShot(eventPath_Death, transform.position);
+
             // spawn a particle system when dying
             var vfx = Instantiate(DeathVfx, DeathVfxSpawnPoint.position, Quaternion.identity);
             Destroy(vfx, 5f);
@@ -424,6 +426,8 @@ namespace Unity.FPS.AI
             if (didFire && onAttack != null)
             {
                 onAttack.Invoke();
+
+                FMODUnity.RuntimeManager.PlayOneShot(eventPath_Attack, transform.position);
 
                 if (SwapToNextWeapon && m_Weapons.Length > 1)
                 {
