@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e9b849ae2755b428b23edfa9686c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventPath_footstep: event:/SFX/Footsteps
   PlayerCamera: {fileID: 8303093099919959869}
   GravityDownForce: 20
   GroundCheckLayers:

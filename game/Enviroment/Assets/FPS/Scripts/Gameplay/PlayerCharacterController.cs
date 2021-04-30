@@ -7,6 +7,9 @@ namespace Unity.FPS.Gameplay
     [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler))]
     public class PlayerCharacterController : MonoBehaviour
     {
+        [FMODUnity.EventRef]
+        public string eventPath_footstep;
+
         [Header("References")] [Tooltip("Reference to the main camera used for the player")]
         public Camera PlayerCamera;
 
@@ -329,6 +332,8 @@ namespace Unity.FPS.Gameplay
                     if (m_FootstepDistanceCounter >= 1f / chosenFootstepSfxFrequency)
                     {
                         m_FootstepDistanceCounter = 0f;
+                        //play footstep
+                        FMODUnity.RuntimeManager.PlayOneShot(eventPath_footstep, transform.position);
                     }
 
                     // keep track of distance traveled for footsteps sound

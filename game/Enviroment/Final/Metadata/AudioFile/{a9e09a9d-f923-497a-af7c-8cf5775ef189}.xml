@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
-	<object class="AudioFile" id="{0c04448e-557d-4929-ad2f-8ff099cb9421}">
+	<object class="AudioFile" id="{a9e09a9d-f923-497a-af7c-8cf5775ef189}">
 		<property name="assetPath">
-			<value>output/Hoverbot_death.wav</value>
+			<value>output/footstep_4.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
@@ -11,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>1.0982766439909297</value>
+			<value>0.21541950113378686</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{439eefe2-37b6-401e-afd1-299eec2d6d95}</destination>

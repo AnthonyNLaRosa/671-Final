@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/SFX/Shotgun
   guid: 0ccef501a9949249b291d139e49363a7
-  Banks:
-  - {fileID: 8598011718528552490}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -67,8 +66,8 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  MaxDistance: 100
+  Length: 1064
 --- !u!114 &-7169884269222102417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,11 +109,11 @@ MonoBehaviour:
   - {fileID: 8598011718528552490}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 7997
 --- !u!114 &-4909978025731531197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,12 +132,34 @@ MonoBehaviour:
   - {fileID: 8598011718528552490}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -4566194284329932717}
+  IsOneShot: 0
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 2128
+--- !u!114 &-4637449015028516947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Footsteps
+  guid: 5ad49329ed78ba48bd2301b73d240077
+  Banks:
+  - {fileID: 8598011718528552490}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 265
 --- !u!114 &-4566194284329932717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,12 +255,32 @@ MonoBehaviour:
   Path: Final/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637545918193900718
+  lastModified: 637553275238481129
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1228
+    Value: 1102
   Exists: 1
+--- !u!114 &-457851545874872955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Weapon_Cooling/Intensity
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,21 +298,19 @@ MonoBehaviour:
   - {fileID: 8598011718528552490}
   EditorEvents:
   - {fileID: 5258101198842197177}
-  - {fileID: 1438321171520455596}
   - {fileID: -7169884269222102417}
   - {fileID: -7867467863249030477}
   - {fileID: 7107068172672224806}
-  - {fileID: -9021061452362238910}
   - {fileID: 1114132876210330951}
-  - {fileID: 1276904816468439905}
   - {fileID: -4909978025731531197}
   - {fileID: -6311260447861563929}
+  - {fileID: -4637449015028516947}
   EditorParameters: []
   MasterBanks:
   - {fileID: 8598011718528552490}
   StringsBanks:
   - {fileID: -1389153198726256533}
-  stringsBankWriteTime: 637545918193900718
+  stringsBankWriteTime: 637553275238481129
   cacheVersion: 6
 --- !u!114 &1114132876210330951
 MonoBehaviour:
@@ -286,7 +325,7 @@ MonoBehaviour:
   m_Name: event:/SFX/Blaster
   m_EditorClassIdentifier: 
   Path: event:/SFX/Blaster
-  guid: 285a5b1555275a4a9898e9226cf549e3
+  guid: 9acbbf304120ef4c91c51a6f30ebeece
   Banks:
   - {fileID: 8598011718528552490}
   IsStream: 0
@@ -295,7 +334,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 500
 --- !u!114 &1276904816468439905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,8 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/SFX/Launcher
   guid: e550f8f12e9d8c4dbd5a1cbefbbdceb3
-  Banks:
-  - {fileID: 8598011718528552490}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -333,8 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/SFX/Hoverbot_Movement
   guid: 59d141badec7c640a8dc6a7273b15fcd
-  Banks:
-  - {fileID: 8598011718528552490}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -491,6 +528,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &7180945556565525765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Weapon_Cooling/Intensity
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 --- !u!114 &7770112280951784296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,7 +603,7 @@ MonoBehaviour:
   Path: Final/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637545918193880746
+  lastModified: 637553275238461135
   LoadResult: 0
   FileSizes: []
   Exists: 1
