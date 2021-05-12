@@ -5,7 +5,7 @@ namespace Unity.FPS.Game
 {
     public class AudioUtility
     {
-        static AudioManager s_AudioManager;
+        /*static AudioManager s_AudioManager;
 
         public enum AudioGroups
         {
@@ -61,6 +61,6 @@ namespace Unity.FPS.Game
 
             s_AudioManager.GetFloat("MasterVolume", out var valueInDb);
             return Mathf.Pow(10f, valueInDb / 20.0f);
-        }
+        }*/
     }
 }

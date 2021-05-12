@@ -5,44 +5,30 @@ namespace Unity.FPS.Game
 {
     public class AudioManager : MonoBehaviour
     {
-        public AudioMixer[] AudioMixers;
+        [FMODUnity.EventRef]
+        public string eventPath_Ambience;
+        FMOD.Studio.EventInstance ambienceState;
 
-        public AudioMixerGroup[] FindMatchingGroups(string subPath)
+        [SerializeField][Range(0f, 2f)]
+        private float ambience_wind;
+
+
+
+        void Awake()
         {
-            for (int i = 0; i < AudioMixers.Length; i++)
-            {
-                AudioMixerGroup[] results = AudioMixers[i].FindMatchingGroups(subPath);
-                if (results != null && results.Length != 0)
-                {
-                    return results;
-                }
-            }
-
-            return null;
+            ambienceState = FMODUnity.RuntimeManager.CreateInstance(eventPath_Ambience);
+            ambience_wind = 2f;
+            ambienceState.setParameterByName("Ambience_Wind", ambience_wind);
+            ambienceState.start();
         }
 
-        public void SetFloat(string name, float value)
+        void Update()
         {
-            for (int i = 0; i < AudioMixers.Length; i++)
-            {
-                if (AudioMixers[i] != null)
-                {
-                    AudioMixers[i].SetFloat(name, value);
-                }
-            }
-        }
+            //if outside
+            //if inside
+            //if down
 
-        public void GetFloat(string name, out float value)
-        {
-            value = 0f;
-            for (int i = 0; i < AudioMixers.Length; i++)
-            {
-                if (AudioMixers[i] != null)
-                {
-                    AudioMixers[i].GetFloat(name, out value);
-                    break;
-                }
-            }
+            //ambienceState.setParameterByName("Ambience_Wind", ambience_wind);
         }
     }
 }

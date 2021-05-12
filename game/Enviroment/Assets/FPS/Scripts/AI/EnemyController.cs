@@ -255,7 +255,12 @@ namespace Unity.FPS.AI
                     m_EyeRendererData.MaterialIndex);
             }
 
-            FMODUnity.RuntimeManager.PlayOneShot(eventPath_Alert, transform.position);
+            //FMODUnity.RuntimeManager.PlayOneShot(eventPath_Alert, transform.position);
+
+            FMOD.Studio.EventInstance alert = FMODUnity.RuntimeManager.CreateInstance(eventPath_Alert);
+            alert.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            alert.start();
+            alert.release();
         }
 
         public void OrientTowards(Vector3 lookPosition)
@@ -363,7 +368,12 @@ namespace Unity.FPS.AI
 
         void OnDie()
         {
-            FMODUnity.RuntimeManager.PlayOneShot(eventPath_Death, transform.position);
+            //FMODUnity.RuntimeManager.PlayOneShot(eventPath_Death, transform.position);
+
+            FMOD.Studio.EventInstance death = FMODUnity.RuntimeManager.CreateInstance(eventPath_Death);
+            death.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            death.start();
+            death.release();
 
             // spawn a particle system when dying
             var vfx = Instantiate(DeathVfx, DeathVfxSpawnPoint.position, Quaternion.identity);
@@ -427,7 +437,12 @@ namespace Unity.FPS.AI
             {
                 onAttack.Invoke();
 
-                FMODUnity.RuntimeManager.PlayOneShot(eventPath_Attack, transform.position);
+                //FMODUnity.RuntimeManager.PlayOneShot(eventPath_Attack, transform.position);
+
+                FMOD.Studio.EventInstance attack = FMODUnity.RuntimeManager.CreateInstance(eventPath_Attack);
+                attack.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+                attack.start();
+                attack.release();
 
                 if (SwapToNextWeapon && m_Weapons.Length > 1)
                 {

@@ -30,6 +30,13 @@ namespace Unity.FPS.UI
         [Tooltip("Duration of the fade in")] public float FadeInDuration = 0.5f;
         [Tooltip("Duration of the fade out")] public float FadeOutDuration = 2f;
 
+        [Header("Sound")]
+        [FMODUnity.EventRef]
+        public string eventPath_Open;
+
+        [FMODUnity.EventRef]
+        public string eventPath_Close;
+
         [Header("Movement")] [Tooltip("Time it takes to move in the screen")]
         public float MoveInDuration = 0.5f;
 
@@ -75,6 +82,8 @@ namespace Unity.FPS.UI
             m_IsFadingIn = false;
             m_IsMovingIn = false;
 
+            FMODUnity.RuntimeManager.PlayOneShot(eventPath_Close, transform.position);
+
             // start the fade out
             m_IsFadingOut = true;
             m_IsMovingOut = true;
@@ -99,6 +108,8 @@ namespace Unity.FPS.UI
                     CanvasGroup.alpha = 1f;
                     // end the fade in
                     m_IsFadingIn = false;
+
+                    FMODUnity.RuntimeManager.PlayOneShot(eventPath_Open, transform.position);
                 }
             }
 

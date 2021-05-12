@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventPath_Alert: event:/SFX/Turret_Alert
-  eventPath_Attack: 
-  eventPath_Death: 
+  eventPath_Attack: event:/SFX/Hoverbot_Attack
+  eventPath_Death: event:/SFX/Hoverbot_Death
   SelfDestructYHeight: -20
   PathReachingRadius: 0
   OrientationSpeed: 10

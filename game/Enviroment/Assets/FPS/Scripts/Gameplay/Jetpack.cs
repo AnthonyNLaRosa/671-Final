@@ -10,7 +10,9 @@ namespace Unity.FPS.Gameplay
         [FMODUnity.EventRef]
         public string eventPath_Jetpack;
         FMOD.Studio.EventInstance jetpackState;
-        FMOD.Studio.PLAYBACK_STATE state;
+
+        [SerializeField] [Range(0f, 1f)]
+        private float intensity;
 
         [Tooltip("Particles for jetpack vfx")] public ParticleSystem[] JetpackVfx;
 
@@ -64,11 +66,12 @@ namespace Unity.FPS.Gameplay
             CurrentFillRatio = 1f;
 
             jetpackState = FMODUnity.RuntimeManager.CreateInstance(eventPath_Jetpack);
-            jetpackState.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
         }
 
         void Update()
         {
+            jetpackState.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
             // jetpack can only be used if not grounded and jump has been pressed again once in-air
             if (IsPlayergrounded())
             {
@@ -79,6 +82,7 @@ namespace Unity.FPS.Gameplay
                 m_CanUseJetpack = true;
             }
 
+            FMOD.Studio.PLAYBACK_STATE state;
             jetpackState.getPlaybackState(out state);
 
             // jetpack usage
@@ -106,6 +110,8 @@ namespace Unity.FPS.Gameplay
 
                 // consume fuel
                 CurrentFillRatio = CurrentFillRatio - (Time.deltaTime / ConsumeDuration);
+                intensity = CurrentFillRatio;
+                jetpackState.setParameterByName("Intensity", intensity);
 
                 for (int i = 0; i < JetpackVfx.Length; i++)
                 {

@@ -6,7 +6,13 @@ namespace Unity.FPS.Gameplay
     [RequireComponent(typeof(AudioSource))]
     public class ChargedWeaponEffectsHandler : MonoBehaviour
     {
-        [Header("Visual")] [Tooltip("Object that will be affected by charging scale & color changes")]
+        [Header("Sound")]
+        [FMODUnity.EventRef]
+        public string eventPath_LauncherCharge;
+        FMOD.Studio.EventInstance launcherChargeState;
+
+        [Header("Visual")]
+        [Tooltip("Object that will be affected by charging scale & color changes")]
         public GameObject ChargingObject;
 
         [Tooltip("The spinning frame")] public GameObject SpinningFrame;
@@ -14,7 +20,8 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Scale of the charged object based on charge")]
         public MinMaxVector3 Scale;
 
-        [Header("Particles")] [Tooltip("Particles to create when charging")]
+        [Header("Particles")]
+        [Tooltip("Particles to create when charging")]
         public GameObject DiskOrbitParticlePrefab;
 
         [Tooltip("Local position offset of the charge particles (relative to this transform)")]
@@ -55,6 +62,7 @@ namespace Unity.FPS.Gameplay
         void Awake()
         {
             m_LastChargeTriggerTimestamp = 0.0f;
+            launcherChargeState = FMODUnity.RuntimeManager.CreateInstance(eventPath_LauncherCharge);
         }
 
         void SpawnParticleSystem()
@@ -81,6 +89,8 @@ namespace Unity.FPS.Gameplay
 
         void Update()
         {
+            launcherChargeState.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
             if (ParticleInstance == null)
                 SpawnParticleSystem();
 
@@ -97,6 +107,26 @@ namespace Unity.FPS.Gameplay
             m_VelocityOverTimeModule.orbitalY = OrbitY.GetValueFromRatio(m_ChargeRatio);
             m_DiskOrbitParticle.transform.localScale = Radius.GetValueFromRatio(m_ChargeRatio * 1.1f);
 
+            FMOD.Studio.PLAYBACK_STATE state;
+            launcherChargeState.getPlaybackState(out state);
+
+            // update sound's volume and pitch 
+            if (m_ChargeRatio > 0)
+            {
+                if (state == FMOD.Studio.PLAYBACK_STATE.STOPPED)
+                {
+                    launcherChargeState.start();
+                }
+                
+            }
+            else
+            {
+                if (state != FMOD.Studio.PLAYBACK_STATE.STOPPED)
+                {
+                    launcherChargeState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    
+                }
+            }
         }
     }
 }

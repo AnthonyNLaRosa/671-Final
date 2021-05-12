@@ -22,7 +22,9 @@ namespace Unity.FPS.Gameplay
         [FMODUnity.EventRef]
         public string eventPath_Cooling;
         FMOD.Studio.EventInstance coolingState;
-        FMOD.Studio.PLAYBACK_STATE state;
+
+        [SerializeField][Range(0f, 1f)]
+        private float intensity;
 
         [Header("Visual")] [Tooltip("The VFX to scale the spawn rate based on the ammo ratio")]
         public ParticleSystem SteamVfx;
@@ -54,8 +56,7 @@ namespace Unity.FPS.Gameplay
             emissionModule.rateOverTimeMultiplier = 0f;
 
             coolingState = FMODUnity.RuntimeManager.CreateInstance(eventPath_Cooling);
-            coolingState.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-
+            
             m_OverheatingRenderersData = new List<RendererIndexData>();
             foreach (var renderer in GetComponentsInChildren<Renderer>(true))
             {
@@ -75,6 +76,8 @@ namespace Unity.FPS.Gameplay
 
         void Update()
         {
+            coolingState.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
             // visual smoke shooting out of the gun
             float currentAmmoRatio = m_Weapon.CurrentAmmoRatio;
             if (currentAmmoRatio != m_LastAmmoRatio)
@@ -90,9 +93,11 @@ namespace Unity.FPS.Gameplay
                 m_SteamVfxEmissionModule.rateOverTimeMultiplier = SteamVfxEmissionRateMax * (1f - currentAmmoRatio);
             }
 
+            FMOD.Studio.PLAYBACK_STATE state;
             coolingState.getPlaybackState(out state);
+            coolingState.setParameterByName("Intensity", intensity);
 
-            // cooling sound
+
             if (state == FMOD.Studio.PLAYBACK_STATE.STOPPED
                 && currentAmmoRatio != 1
                 && m_Weapon.IsWeaponActive
@@ -100,14 +105,15 @@ namespace Unity.FPS.Gameplay
             {
                 coolingState.start();
             }
-            else if (state != FMOD.Studio.PLAYBACK_STATE.STOPPED 
-                && (currentAmmoRatio == 1 || !m_Weapon.IsWeaponActive || !m_Weapon.IsCooling))
+            else if (state != FMOD.Studio.PLAYBACK_STATE.STOPPED
+                        && (currentAmmoRatio == 1 || !m_Weapon.IsWeaponActive || !m_Weapon.IsCooling))
             {
                 coolingState.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 return;
             }
 
-            //m_AudioSource.volume = AmmoToVolumeRatioCurve.Evaluate(1 - currentAmmoRatio);
+            intensity = AmmoToVolumeRatioCurve.Evaluate(1 - currentAmmoRatio);
+
 
             m_LastAmmoRatio = currentAmmoRatio;
         }

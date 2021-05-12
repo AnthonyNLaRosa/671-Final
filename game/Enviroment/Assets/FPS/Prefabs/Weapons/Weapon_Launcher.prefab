@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad90ba0b1477764da373f5ec01a8cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventPath_laser: 
+  eventPath_laser: event:/SFX/Launcher_Shoot
   WeaponName: Disc Launcher
   WeaponIcon: {fileID: 21300000, guid: cab1398a10b307b44b0ffeb0eef23254, type: 3}
   CrosshairDataDefault:
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92ab16a4151e294a9e6f5a025221be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventPath_LauncherCharge: event:/SFX/Launcher_Charge
   ChargingObject: {fileID: 2990922162098100103}
   SpinningFrame: {fileID: 2990922162098100101}
   Scale:
@@ -152,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventPath_Cooling: event:/SFX/Weapon_Cooling
+  intensity: 0
   SteamVfx: {fileID: 5137593757008142652}
   SteamVfxEmissionRateMax: 8
   OverheatGradient:
